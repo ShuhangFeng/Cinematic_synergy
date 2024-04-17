@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "name": "Inception",
+      "year": "2010",
+      "comments": [
+        { "id": 1, "text": "Great movie!", "user": "User1" },
+        { "id": 2, "text": "A masterpiece!", "user": "User2" }
+      ]
+      
+    },
+    {
+      "id": 2,
+      "name": "Harry Potter1",
+      "year": "2001",
+      "comments": [
+        { "id": 1, "text": "Avankada!!!", "user": "User1" },
+        { "id": 2, "text": "Harry!", "user": "User2" }
+      ]
+      
+    }
+  ]
+  
