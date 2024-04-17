@@ -1,65 +1,72 @@
-import React, { useState } from 'react';
-import moviesData from './movies.json';
+import React, { useState, useEffect } from 'react';
+import MovieAPI from './MovieAPI';
 
 function UserManager() {
-  const [movies, setMovies] = useState(moviesData);
+  const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [commentText, setCommentText] = useState('');
   const [userName, setUserName] = useState('');
   const [selectedMovieId, setSelectedMovieId] = useState(null);
 
+  useEffect(() => {
+    async function fetchMovies() {
+      const fetchedMovies = await MovieAPI.getAllMovies();
+      setMovies(fetchedMovies);
+    }
+    fetchMovies();
+  }, []);
+
   const filteredMovies = movies.filter(movie =>
     movie.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const addComment = (movieId) => {
-    const updatedMovies = movies.map(movie => {
-      if (movie.id === movieId) {
-        const newCommentId = movie.comments.length > 0 ? Math.max(...movie.comments.map(c => c.id)) + 1 : 1;
-        const updatedMovie = {
-          ...movie,
-          comments: [...movie.comments, { id: newCommentId, text: commentText, user: userName }]
-        };
-        return updatedMovie;
-      }
-      return movie;
-    });
-    setMovies(updatedMovies);
-    setCommentText('');
-    setUserName('');
+  const addComment = async (movieId) => {
+    const movieToUpdate = movies.find(movie => movie.id === movieId);
+    if (!movieToUpdate) return;
+
+    const newCommentId = movieToUpdate.comments.length > 0 ? Math.max(...movieToUpdate.comments.map(c => c.id)) + 1 : 1;
+    const newComment = { id: newCommentId, text: commentText, user: userName };
+    const updatedComments = [...movieToUpdate.comments, newComment];
+    const updatedMovie = { ...movieToUpdate, comments: updatedComments };
+
+    await MovieAPI.updateMovie(movieId, updatedMovie);
+    refreshMovies();
   };
 
   const updateComment = (movieId, commentId) => {
     const newText = prompt("Update your comment:");
     if (newText !== null && newText.trim() !== '') {
-      setMovies(movies.map(movie => {
-        if (movie.id === movieId) {
-          return {
-            ...movie,
-            comments: movie.comments.map(comment => {
-              if (comment.id === commentId) {
-                return { ...comment, text: newText };
-              }
-              return comment;
-            })
-          };
-        }
-        return movie;
-      }));
+      const movieToUpdate = movies.find(movie => movie.id === movieId);
+      if (!movieToUpdate) return;
+  
+      const updatedComments = movieToUpdate.comments.map(comment =>
+        comment.id === commentId ? { ...comment, text: newText } : comment
+      );
+      const updatedMovie = { ...movieToUpdate, comments: updatedComments };
+  
+      // Assuming updateMovie is an async function
+      MovieAPI.updateMovie(movieId, updatedMovie).then(refreshMovies);
     }
   };
+  
 
-  const deleteComment = (movieId, commentId) => {
-    setMovies(movies.map(movie => {
-      if (movie.id === movieId) {
-        return {
-          ...movie,
-          comments: movie.comments.filter(comment => comment.id !== commentId)
-        };
-      }
-      return movie;
-    }));
+  const deleteComment = async (movieId, commentId) => {
+    const movieToUpdate = movies.find(movie => movie.id === movieId);
+    if (!movieToUpdate) return;
+
+    const updatedComments = movieToUpdate.comments.filter(comment => comment.id !== commentId);
+    const updatedMovie = { ...movieToUpdate, comments: updatedComments };
+
+    await MovieAPI.updateMovie(movieId, updatedMovie);
+    refreshMovies();
   };
+
+  const refreshMovies = async () => {
+    const fetchedMovies = await MovieAPI.getAllMovies();
+    setMovies(fetchedMovies);
+  };
+
+  // UI Rendering remains the same as before
 
   return (
     <div>
