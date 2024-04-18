@@ -7,7 +7,7 @@ const TopBar = () => {
   const navigate = useNavigate();
 
   const handleTopBarClick = () => {
-    navigate("/"); // Change '/' to '/home' if you want to navigate to '/home'
+    navigate("/");
   };
 
   return (
@@ -20,7 +20,7 @@ const TopBar = () => {
       }}
       onClick={handleTopBarClick}
     >
-      <h1>Cinematic Synergy</h1>
+      <h1>CineSphere</h1>
     </div>
   );
 };

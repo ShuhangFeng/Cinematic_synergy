@@ -1,5 +1,3 @@
-// /frontend/src/components/MovieAPI.js
-
 class MovieAPI {
     static baseURL = '/movies';
 
