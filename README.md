@@ -1,11 +1,17 @@
 # How to use the project locally
 
-## Frontend
+## Starting Frontend
 install node
 ### `npm start`
 
-## Backend
-install python, Flask
+## Starting Database
+install python first
+Then go to /database folder
+### `pip install flask`
+### `pip install pymongo`
+### `chmod +x mongo.sh`
+### `./mongo.sh`
+### `python __main__.py`
 
 # Getting Started with Create React App
 
