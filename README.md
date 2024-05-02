@@ -2,6 +2,7 @@
 
 ## Starting Frontend
 install node
+go to /frontend folder
 ### `npm start`
 
 ## Starting Database
