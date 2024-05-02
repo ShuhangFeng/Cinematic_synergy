@@ -1,3 +1,12 @@
+# How to use the project locally
+
+## Frontend
+install node
+### `npm start`
+
+## Backend
+install python, Flask
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
