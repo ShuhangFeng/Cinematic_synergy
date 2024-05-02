@@ -1,8 +1,9 @@
 # How to use the project locally
 
 ## Starting Frontend
-install node
+install node, you can download from https://nodejs.org/en
 go to /frontend folder
+### `npm install`
 ### `npm start`
 
 ## Starting Database
