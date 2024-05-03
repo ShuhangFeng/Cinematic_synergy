@@ -1,13 +1,14 @@
 # How to use the project locally
 
 ## Starting Frontend
-install node, you can download from https://nodejs.org/en
+install node, you can download it from https://nodejs.org/en
 go to /frontend folder
 ### `npm install`
 ### `npm start`
 
 ## Starting Database
-install python first
+install python
+install MongoDB from https://www.mongodb.com/ 
 Then go to /database folder
 ### `pip install flask`
 ### `pip install pymongo`
