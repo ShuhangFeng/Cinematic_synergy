@@ -7,7 +7,7 @@ go to /frontend folder
 ### `npm start`
 
 ## Starting Database
-install python
+install python \
 install MongoDB from https://www.mongodb.com/ 
 Then go to /database folder
 ### `pip install flask`
