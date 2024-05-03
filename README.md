@@ -1,4 +1,4 @@
-# How to use the project locally
+# How to setup and run the project locally
 
 ## Starting Frontend
 install node, you can download it from https://nodejs.org/en
